@@ -5,6 +5,7 @@ import { Routes } from './main/routes';
 // Initialize the express engine
 const app: express.Application = express();
 app.use(express.json())
+app.use(express.static(__dirname + '/public'));
 app.use(expressLogger)
  
 // Take a port 3000 for running server.
