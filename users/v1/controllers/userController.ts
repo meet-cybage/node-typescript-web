@@ -1,13 +1,16 @@
 import express from "express"
 import { logger } from "../../../main/logging"
-import { userService } from "../services/userService"
+import { UserService } from "../services/userService"
+import { User } from "../interfaces/response-models";
 
 class UsersController{
 
-    getUsers(req: express.Request, res: express.Response){
+    userService: UserService = new UserService();
+
+    async getUsers(req: express.Request, res: express.Response){
         logger.info("First winston log")
         res.status(200)
-        res.send(userService.getUsers())
+        res.send(await this.userService.getUsers())
     }
 }
 

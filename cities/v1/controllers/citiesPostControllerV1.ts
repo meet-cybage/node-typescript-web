@@ -1,12 +1,14 @@
 import express from "express"
-import { cityPostService } from "../services/citiesPostService"; 
+import { CityPostService } from "../services/citiesPostService"; 
 
 
 class CityPostControllerV1{
 
-    addCity(req: express.Request, res: express.Response){
+    cityPostService: CityPostService = new CityPostService()
+
+    async addCity(req: express.Request, res: express.Response){
         res.status(201)
-        res.send(cityPostService.addCityName(req.body.city))
+        res.send(await this.cityPostService.addCityName(req.body))
     }
 }
 

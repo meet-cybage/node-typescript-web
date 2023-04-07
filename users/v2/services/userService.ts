@@ -1,7 +1,22 @@
+import { Route, Get, Example, Tags } from "tsoa";
+import { Users } from "../interfaces/response-model";
 
-class UserService{
+@Tags("UserVersion2")
+@Route("/api/v2")
+export class UserServiceV2{
 
-    getUsers(){
+    @Example<Users>([
+        {
+            "name": "mhp",
+            "skills": "python"
+        },
+        {
+            "name": "mhp1",
+            "skills": "python1"
+        },
+    ])
+    @Get("/users")
+    async getUsers(): Promise<Users>{
         const users = [
             {
                 "name": "mhp-v2",
@@ -15,5 +30,3 @@ class UserService{
         return users
     }
 }
-
-export let userService = new UserService();

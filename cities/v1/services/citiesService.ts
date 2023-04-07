@@ -1,11 +1,23 @@
-class CityService{
+import { Route, Get, Query, Tags } from "tsoa"
+import { CityInterface } from "../interfaces/response-model"
 
-    getCityName(cityName:string){
-        const city: object = {"cityName": cityName}
-        return city
+@Tags("City")
+@Route("/api/v1")
+export class CityService{
+
+    @Get("/city/{city_name}")
+    async getCityName(
+        // @Query() city_name:string
+        city_name:string
+    ): Promise<CityInterface>{
+
+        return {
+            cityName: city_name
+        }
     }
 
-    getCities(){
+    @Get("/cities")
+    async getCities(): Promise<Array<string>>{
         const cities = [
             "Ahmedabad",
             "Gandhinagar"
@@ -13,5 +25,3 @@ class CityService{
         return cities
     }
 }
-
-export let cityService = new CityService();

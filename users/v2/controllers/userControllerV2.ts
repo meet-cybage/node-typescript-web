@@ -1,11 +1,13 @@
 import express from "express"
-import { userService } from "../services/userService"
+import { UserServiceV2 } from "../services/userService"
 
 
 class UsersControllerV2{
 
-    getUsers(req: express.Request, res: express.Response){
-        res.send(userService.getUsers())
+    userService: UserServiceV2 = new UserServiceV2()
+
+    async getUsers(req: express.Request, res: express.Response){
+        res.send(await this.userService.getUsers())
     }
 }
 
