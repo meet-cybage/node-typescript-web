@@ -1,17 +1,19 @@
 import express from "express"
 import { logger } from "../../../main/logging";
-import { cityService } from "../services/citiesService";
+import { CityService } from "../services/citiesService";
 
 
 class CitiesController{
 
-    getCityName(req: express.Request, res: express.Response){
+    cityService: CityService = new CityService()
+
+    async getCityName(req: express.Request, res: express.Response){
         logger.info("Second winston log")
-        res.send(cityService.getCityName(req.params.cityName))
+        res.send(await this.cityService.getCityName(req.params.cityName))
     }
 
-    getCities(req: express.Request, res: express.Response){
-        res.send(cityService.getCities())
+    async getCities(req: express.Request, res: express.Response){
+        res.send(await this.cityService.getCities())
     }
 }
 
