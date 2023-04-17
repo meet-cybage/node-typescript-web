@@ -15,8 +15,8 @@ export class Routes{
 
     configureRoutes(){
         // 
-        this.app.use("/api", userRoutesV1)
-        this.app.use("/api", userRoutesV2)
-        this.app.use("/api", cityRoutesV1)
+        this.app.use("/v1", userRoutesV1)
+        this.app.use("/v2", userRoutesV2)
+        this.app.use("/v1", cityRoutesV1)
     }
 }
