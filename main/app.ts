@@ -1,17 +1,17 @@
 import express from 'express';
-import { expressLogger } from './main/logging';
-import { Routes } from './main/routes';
-import { SwaggerConfig } from './main/swagger';
-import { PassportConfiguration } from './main/passport-authentication';
+import { expressLogger } from './logging';
+import { Routes } from './routes';
+import { SwaggerConfig } from './swagger';
+import { PassportConfiguration } from './passport-authentication';
  
 // Initialize the express engine
 const app: express.Application = express();
 app.use(express.json())
 app.use(express.static(__dirname + '/public'));
-app.use(expressLogger)
- 
-// Take a port 3000 for running server.
-const port: number = 3000;
+
+if (process.env.NODE_ENV !== 'test'){
+    app.use(expressLogger)
+}
 
 const api: express.Application = express()
 app.use("/api", api)
@@ -27,7 +27,9 @@ swagger.SwaggerConfiguration()
 let routes: Routes = new Routes(api);
 routes.configureRoutes()
 
-app.listen(port, () => {
-    console.log(`TypeScript with Express
-         http://localhost:${port}/`);
-});
+export default app;
+
+
+// npx ts-jest config:init
+// npx tsc --init
+// npm init
